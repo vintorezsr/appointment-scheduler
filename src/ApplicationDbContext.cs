@@ -10,5 +10,6 @@ namespace AppointmentScheduler
         {
         }
 
+        public virtual DbSet<AppointmentSchedule>? Schedules { get; set; }
     }
 }
