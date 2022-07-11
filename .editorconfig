@@ -1,0 +1,60 @@
+
+[*.cs]
+indent_style = space
+indent_size = 4
+tab_width = 4
+
+[*]
+
+# Microsoft .NET properties
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_between_query_expression_clauses = true
+csharp_prefer_braces = true:none
+
+# ReSharper properties
+resharper_align_linq_query = true
+resharper_align_multiline_array_and_object_initializer = true
+resharper_align_multiline_calls_chain = true
+resharper_align_multiline_property_pattern = true
+resharper_blank_lines_after_control_transfer_statements = 1
+resharper_blank_lines_before_block_statements = 1
+resharper_blank_lines_before_single_line_comment = 1
+resharper_braces_for_for = required
+resharper_braces_for_foreach = required
+resharper_braces_for_while = required
+resharper_braces_redundant = true
+resharper_csharp_indent_size = 4
+resharper_csharp_keep_blank_lines_in_code = 1
+resharper_csharp_keep_blank_lines_in_declarations = 1
+resharper_csharp_new_line_before_while = true
+resharper_csharp_stick_comment = false
+resharper_csharp_tab_width = 4
+resharper_csharp_use_indent_from_vs = false
+resharper_csharp_wrap_after_declaration_lpar = true
+resharper_csharp_wrap_arguments_style = chop_if_long
+resharper_csharp_wrap_before_binary_opsign = true
+resharper_csharp_wrap_chained_method_calls = chop_if_long
+resharper_csharp_wrap_for_stmt_header_style = wrap_if_long
+resharper_csharp_wrap_multiple_declaration_style = wrap_if_long
+resharper_csharp_wrap_ternary_expr_style = chop_always
+resharper_indent_anonymous_method_block = false
+resharper_keep_existing_embedded_arrangement = false
+resharper_keep_existing_invocation_parens_arrangement = false
+resharper_keep_existing_property_patterns_arrangement = false
+resharper_keep_existing_switch_expression_arrangement = false
+resharper_max_initializer_elements_on_line = 1
+resharper_outdent_statement_labels = true
+resharper_place_constructor_initializer_on_same_line = false
+resharper_place_field_attribute_on_same_line = if_owner_is_single_line
+resharper_place_simple_initializer_on_single_line = false
+resharper_place_simple_property_pattern_on_single_line = false
+resharper_place_type_constraints_on_same_line = false
+resharper_wrap_array_initializer_style = chop_always
+resharper_wrap_before_arrow_with_expressions = true
+resharper_wrap_before_extends_colon = true
+resharper_wrap_before_linq_expression = true
+resharper_wrap_chained_binary_expressions = chop_if_long
+resharper_wrap_linq_expressions = chop_always
+resharper_wrap_multiple_type_parameter_constraints_style = chop_always
+resharper_wrap_object_and_collection_initializer_style = chop_always
+resharper_wrap_property_pattern = chop_always
