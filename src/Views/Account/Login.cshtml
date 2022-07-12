@@ -1,6 +1,7 @@
 ﻿@model LoginViewModel
 @{
 	Layout = "~/Views/Shared/_LoginLayout.cshtml";
+	var hasError = Model != null && Model.Success.HasValue && !Model.Success.Value;
 }
 @section scripts {
 	<partial name="_ValidationScriptsPartial" />
@@ -13,6 +14,13 @@
 				<div class="card shadow-lg mt-5">
 					<div class="card-body p-5">
 						<h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
+						@if (hasError)
+						{
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								Invalid username or password.
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+						}
 						@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "needs-validation", autocomplete = "off" }))
 						{
 							<div class="mb-3">

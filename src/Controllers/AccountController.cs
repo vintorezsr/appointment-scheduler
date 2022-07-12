@@ -9,6 +9,13 @@ namespace AppointmentScheduler.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly ApplicationDbContext _applicationDbContext;
+
+        public AccountController(ApplicationDbContext applicationDbContext)
+        {
+            _applicationDbContext = applicationDbContext;
+        }
+
         [Authorize]
         public IActionResult Index()
         {
@@ -32,11 +39,23 @@ namespace AppointmentScheduler.Controllers
         [HttpPost]
         public IActionResult Login([FromForm]LoginViewModel loginViewModel)
         {
-            var ss = loginViewModel;
+            var userAccount = _applicationDbContext.UserAccounts?.FirstOrDefault(x => x.Username == loginViewModel.Username);
+            var passwordMatch = userAccount != null && BCrypt.Net.BCrypt.Verify(loginViewModel.Password, userAccount?.Password);
+
+            if (!passwordMatch)
+            {
+                var viewModel = new LoginViewModel
+                {
+                    Success = false
+                };
+                return View(viewModel);
+            }
 
             var claims = new []
             {
-                new Claim("test", "test")
+                new Claim(ClaimTypes.NameIdentifier, userAccount!.Id.ToString()),
+                new Claim(ClaimTypes.Name, userAccount!.Username),
+                new Claim(ClaimTypes.Email, userAccount!.Email)
             };
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
