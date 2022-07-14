@@ -34,5 +34,13 @@ namespace AppointmentScheduler.Controllers
 
             return View(appointmentSchedules);
         }
+
+        /// <summary>
+        /// Appointment creation page.
+        /// </summary>
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
