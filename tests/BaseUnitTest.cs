@@ -2,7 +2,7 @@ using Xunit;
 
 namespace AppointmentScheduler.Test
 {
-    public class UnitTest1
+    public class BaseUnitTest
     {
         [Fact]
         public void Test1()
