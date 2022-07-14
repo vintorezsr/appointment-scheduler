@@ -8,6 +8,9 @@
         <environment names="Development">
             <p>Use Swagger UI on this <a href="~/swagger" target="_blank">link</a> to do CRUD operation.</p>
         </environment>
+        <environment names="Production">
+            <a asp-controller="Appointment" asp-action="Create">Create new Schedule</a>
+        </environment>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
