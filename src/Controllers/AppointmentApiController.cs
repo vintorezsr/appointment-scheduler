@@ -28,6 +28,8 @@ namespace AppointmentScheduler.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AppointmentSchedule appointmentSchedule)
         {
+            var userAccountId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            appointmentSchedule.UserAccountId = userAccountId;
             appointmentSchedule.StartTime = appointmentSchedule.StartTime.ToUniversalTime();
             appointmentSchedule.EndTime = appointmentSchedule.EndTime.ToUniversalTime();
             _applicationDbContext.Schedules?.Add(appointmentSchedule);
@@ -42,6 +44,8 @@ namespace AppointmentScheduler.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] AppointmentSchedule appointmentSchedule)
         {
+            var userAccountId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            appointmentSchedule.UserAccountId = userAccountId;
             appointmentSchedule.StartTime = appointmentSchedule.StartTime.ToUniversalTime();
             appointmentSchedule.EndTime = appointmentSchedule.EndTime.ToUniversalTime();
             _applicationDbContext.Schedules?.Update(appointmentSchedule);
@@ -56,8 +60,12 @@ namespace AppointmentScheduler.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(Guid id)
         {
+            var userAccountId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var appointmentSchedule = _applicationDbContext.Schedules?.FirstOrDefault(x => x.Id == id);
-            if (appointmentSchedule == null) return BadRequest();
+            if (appointmentSchedule == null || userAccountId != appointmentSchedule.UserAccountId)
+            {
+                return BadRequest();
+            }
             _applicationDbContext.Schedules?.Remove(appointmentSchedule);
             await _applicationDbContext.SaveChangesAsync();
             return NoContent();
@@ -70,7 +78,7 @@ namespace AppointmentScheduler.Controllers
         [HttpPost("check")]
         public IActionResult CheckConflict([FromBody] Schedule schedule)
         {
-            var userAccountId = Guid.Parse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value!);
+            var userAccountId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var startTimeUtc = schedule.StartTime.ToUniversalTime();
             var endTimeUtc = schedule.EndTime.ToUniversalTime();
             var hasConflict = _applicationDbContext.Schedules?.Any(x => x.UserAccountId == userAccountId && endTimeUtc >= x.StartTime && startTimeUtc <= x.EndTime);

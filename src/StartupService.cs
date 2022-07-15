@@ -26,6 +26,7 @@ namespace AppointmentScheduler
 
             var userAccount = new UserAccount
             {
+                Id = Guid.Parse("b5fbcf73-35f6-4e0e-bbed-eb82ccea667d"),
                 Username = "vintorezsr",
                 Password = BCrypt.Net.BCrypt.HashPassword("123456789"),
                 Email = "vintorezsr@gmail.com"

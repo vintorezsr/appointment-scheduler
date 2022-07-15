@@ -1,3 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../test.props"/>
+	<Import Project="../test.props" />
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.7" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\src\AppointmentScheduler.csproj" />
+	</ItemGroup>
 </Project>

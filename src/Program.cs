@@ -18,6 +18,19 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/account/login";
         options.LogoutPath = "/account/logout";
+        options.Events.OnRedirectToLogin = x =>
+        {
+            if (x.Request.Path.StartsWithSegments("/api"))
+            {
+                x.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            }
+            else
+            {
+                x.Response.Redirect(x.RedirectUri);
+            }
+
+            return Task.CompletedTask;
+        };
     });
 builder.Services.AddHostedService<StartupService>();
 builder.Services.AddEndpointsApiExplorer();
