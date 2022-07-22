@@ -46,5 +46,18 @@ namespace AppointmentScheduler.Models
         /// Reference to the <see cref="UserAccount"/> instance.
         /// </summary>
         public UserAccount? UserAccount { get; set; }
+
+        public static AppointmentSchedule CreateFrom(Guid userAccountId, AppointmentScheduleDto appointmentScheduleDto)
+        {
+            return new AppointmentSchedule
+            {
+                Id = appointmentScheduleDto.Id,
+                UserAccountId = userAccountId,
+                Title = appointmentScheduleDto.Title,
+                Description = appointmentScheduleDto.Description,
+                StartTime = appointmentScheduleDto.StartTime.ToUniversalTime(),
+                EndTime = appointmentScheduleDto.EndTime.ToUniversalTime(),
+            };
+        }
     }
 }
